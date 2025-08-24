@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Список сотрудников</h1>
+    <table>
+        <tr>
+            <th>Имя</th>
+            <th>Статус</th>
+            <th>Последняя смена</th>
+        </tr>
+        {% for emp in employees %}
+        <tr>
+            <td>{{ emp.name }}</td>
+            <td>
+                {% if emp.status == 'on' %}
+                    <span class="status on">На смене</span>
+                {% else %}
+                    <span class="status off">Не на смене</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if emp.last_time %}
+                    {{ emp.last_time.strftime("%Y-%m-%d %H:%M") }}
+                {% else %}
+                    Нет данных
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
