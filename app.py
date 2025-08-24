@@ -7,9 +7,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'secret'
 db.init_app(app)
 
-@app.before_first_request
-def create_tables():
+with app.app_context():
     db.create_all()
+
 
 @app.route('/admin/dashboard')
 def admin_dashboard():
@@ -33,3 +33,4 @@ def admin_dashboard():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
